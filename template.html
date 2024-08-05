@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation of Koseki Tohon Certificate</title>
+    <style>
+        .underline {
+            border-bottom: 1px solid black;
+        }
+
+        .signature-space {
+            display: inline-block;
+            width: 200px;
+        }
+
+    </style>
+</head>
+<body>
+<hr>
+<div>
+    <p>I certify that the foregoing is a correct translation.</p>
+    <div class="grid-x grid-padding-x">
+        <div class="cell small-6">
+            <p class="underline">Translator’s Name: {{translatorName}}</p>
+        </div>
+        <div class="cell small-6">
+            <p class="underline">Date: {{translationDate}}</p>
+        </div>
+    </div>
+    <div class="grid-x grid-padding-x">
+        <div class="cell small-6">
+            <p class="underline">Translator’s Signature: <span class="signature-space"></span></p>
+        </div>
+    </div>
+</div>
+<!-- Foundation CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/css/foundation.min.css">
+<!-- Foundation JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
+</body>
+</html>

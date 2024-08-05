@@ -94,3 +94,30 @@ document.addEventListener('DOMContentLoaded', function () {
     var today = new Date().toISOString().split('T')[0];
     document.getElementById('translationDate').value = today;
 });
+
+function formatDate(date) {
+    const options = {year: 'numeric', month: 'long', day: 'numeric'};
+    return new Date(date).toLocaleDateString('en-US', options);
+}
+
+function generateDocument(event) {
+    event.preventDefault();
+    const form = document.getElementById('kosekiForm');
+    const formData = new FormData(form);
+    const translatorName = formData.get('translatorName');
+    const translationDate = formatDate(formData.get('translationDate'));
+
+    fetch('template.html')
+        .then(response => response.text())
+        .then(template => {
+            const rendered = Mustache.render(template, {
+                translatorName: translatorName,
+                translationDate: translationDate
+            });
+
+            const newWindow = window.open('', '', 'width=800,height=600');
+            newWindow.document.write(rendered);
+            newWindow.document.close();
+            newWindow.focus();
+        });
+}
