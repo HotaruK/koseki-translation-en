@@ -14,12 +14,52 @@
             width: 200px;
         }
 
+        .document {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .issue-date {
+            text-align: left;
+        }
+
+        .issuer-name {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .small-text {
+            font-size: 0.8em;
+        }
     </style>
 </head>
 <body>
+
+<!-- Issue information -->
+<div class="document">
+    <span class="small-text">Number of Issue: {{issueNumber}}</span><br>
+    <span class="small-text">{{issueCity}}-{{issueType}}, {{issuePrefecture}}-prefecture</span>
+    <p>This is a document certifying all matters recorded in the Family Register</p>
+    <div class="grid-x grid-padding-x">
+        <div class="cell small-6">
+            <p class="issue-date">{{issueDate}}</p>
+        </div>
+        <div class="cell small-6 text-right">
+            <span class="issuer-name">{{issuerName}}</span><br>
+            <span class="small-text">Mayor of {{issueCity}}-{{issueType}}</span>
+        </div>
+    </div>
+</div>
+
+
+<!-- Translator information -->
 <hr>
 <div>
-    <p>I certify that the foregoing is a correct translation.</p>
+    <div class="grid-x grid-padding-x">
+        <div class="cell small-6">
+            <p>I certify that the foregoing is a correct translation.</p>
+        </div>
+    </div>
     <div class="grid-x grid-padding-x">
         <div class="cell small-6">
             <p class="underline">Translator’s Name: {{translatorName}}</p>

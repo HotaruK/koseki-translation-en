@@ -104,6 +104,16 @@ function generateDocument(event) {
     event.preventDefault();
     const form = document.getElementById('kosekiForm');
     const formData = new FormData(form);
+
+    // issue information
+    const issueNumber = formData.get('issueNumber');
+    const issueDate = formatDate(formData.get('issueDate'));
+    const issueCity = formData.get('issueCity');
+    const issueType = formData.get('issueType');
+    const issuePrefecture = formData.get('issuePrefecture');
+    const issuerName = formData.get('issuerName');
+
+    // translator infomation
     const translatorName = formData.get('translatorName');
     const translationDate = formatDate(formData.get('translationDate'));
 
@@ -112,7 +122,13 @@ function generateDocument(event) {
         .then(template => {
             const rendered = Mustache.render(template, {
                 translatorName: translatorName,
-                translationDate: translationDate
+                translationDate: translationDate,
+                issueNumber: issueNumber,
+                issueDate: issueDate,
+                issueCity: issueCity,
+                issueType: issueType,
+                issuePrefecture: issuePrefecture,
+                issuerName: issuerName
             });
 
             const newWindow = window.open('', '', 'width=800,height=600');
@@ -121,3 +137,4 @@ function generateDocument(event) {
             newWindow.focus();
         });
 }
+
