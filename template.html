@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translation of Koseki Tohon Certificate</title>
     <style>
+        .document {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 20px;
+        }
+
+        .title {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 0;
+        }
+
+        .subtitle {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+
         .underline {
             border-bottom: 1px solid black;
         }
@@ -12,11 +31,6 @@
         .signature-space {
             display: inline-block;
             width: 200px;
-        }
-
-        .document {
-            font-family: Arial, sans-serif;
-            margin: 20px;
         }
 
         .issue-date {
@@ -31,12 +45,22 @@
         .small-text {
             font-size: 0.8em;
         }
+
+        .page-break {
+            page-break-before: always;
+        }
     </style>
 </head>
 <body>
-
-<!-- Issue information -->
 <div class="document">
+    <!-- Page title -->
+    <h1 class="title">Translation of Koseki Tohon Certificate</h1>
+    <h2 class="subtitle">(Certificate of Family Register)</h2>
+    <p class="text-right">Certificate of All Records</p>
+
+    <div class="page-break"></div>
+
+    <!-- Issue information -->
     <span class="small-text">Number of Issue: {{issueNumber}}</span><br>
     <span class="small-text">{{issueCity}}-{{issueType}}, {{issuePrefecture}}-prefecture</span>
     <p>This is a document certifying all matters recorded in the Family Register</p>
@@ -49,16 +73,11 @@
             <span class="small-text">Mayor of {{issueCity}}-{{issueType}}</span>
         </div>
     </div>
-</div>
 
-
-<!-- Translator information -->
-<hr>
-<div>
-    <div class="grid-x grid-padding-x">
-        <div class="cell small-6">
-            <p>I certify that the foregoing is a correct translation.</p>
-        </div>
+    <!-- Translator information -->
+    <hr>
+    <div class="cell small-6">
+        <p>I certify that the foregoing is a correct translation.</p>
     </div>
     <div class="grid-x grid-padding-x">
         <div class="cell small-6">
