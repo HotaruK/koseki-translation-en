@@ -27,14 +27,27 @@
             background-color: #c0392b;
             border-color: #c0392b;
         }
+
+        .generate-document-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+        }
+
+        legend {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .card {
+            padding: 20px;
+            margin: 20px 0;
+            border: 5px solid #b8b8b8 !important;
+            border-radius: 10px;
+        }
     </style>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Foundation CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/css/foundation.min.css">
-    <!-- Foundation JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
-    <script src="main.js"></script>
 </head>
 <body>
 
@@ -75,9 +88,6 @@
             </div>
         </div>
     </div>
-    <button class="close-button" data-close aria-label="Close modal" type="button">
-        <span aria-hidden="true">&times;</span>
-    </button>
 </div>
 <!-- Modal -->
 
@@ -85,131 +95,152 @@
     <h1>戸籍翻訳ツール</h1>
     テキスト自由入力の項目は、すべて英語で入力してください。そのままドキュメントに反映されます。<br><br>
     <form id="kosekiForm">
-        <fieldset>
-            <legend>戸籍筆頭者</legend>
-            <label for="honseki">本籍:</label>
-            <input type="text" id="honseki" name="honseki" class="input-group-field">
+        <div class="card">
+            <fieldset>
+                <legend>戸籍筆頭者</legend>
+                <label for="honseki">本籍:</label>
+                <input type="text" id="honseki" name="honseki" class="input-group-field">
 
-            <label for="name">氏名:</label>
-            <input type="text" id="name" name="name" class="input-group-field">
-        </fieldset>
+                <label for="name">氏名:</label>
+                <input type="text" id="name" name="name" class="input-group-field">
+            </fieldset>
+        </div>
 
-        <fieldset>
-            <legend>戸籍事項</legend>
-            <label for="revisionReason">戸籍事項</label>
-            <select id="revisionReason" name="revisionReason" class="input-group-field" onchange="toggleOtherReason()">
-                <option value="kaisei">戸籍改製</option>
-                <option value="other">その他</option>
-            </select>
 
-            <label for="revisionDate">戸籍事項・改製日:</label>
-            <input type="date" id="revisionDate" name="revisionDate" class="input-group-field">
+        <div class="card">
+            <fieldset>
+                <legend>戸籍事項</legend>
+                <label for="revisionReason">戸籍事項</label>
+                <select id="revisionReason" name="revisionReason" class="input-group-field"
+                        onchange="toggleOtherReason()">
+                    <option value="kaisei">戸籍改製</option>
+                    <option value="other">その他</option>
+                </select>
 
-            <div id="otherReasonDiv" style="display:none;">
-                <label for="otherReasonTitle">戸籍事項:</label>
-                <input type="text" id="otherReasonTitle" name="otherReason" class="input-group-field">
-                <label for="otherReasonDescription">事由:</label>
-                <input type="text" id="otherReasonDescription" name="otherReason" class="input-group-field">
-            </div>
-        </fieldset>
+                <label for="revisionDate">戸籍事項・改製日:</label>
+                <input type="date" id="revisionDate" name="revisionDate" class="input-group-field">
 
-        <fieldset>
-            <legend>戸籍に記録されている者</legend>
-            <div id="recordsContainer"></div>
-            <button type="button" class="button" onclick="addRecord()">＋</button>
-        </fieldset>
-
-        <fieldset>
-            <legend>発行情報</legend>
-            <label for="issueNumber">発行番号:</label>
-            <input type="text" id="issueNumber" name="issueNumber" class="input-group-field">
-
-            <label for="issueDate">発行日:</label>
-            <input type="date" id="issueDate" name="issueDate" class="input-group-field">
-
-            <div class="grid-x grid-margin-x">
-                <div class="cell small-8">
-                    <label for="issueCity">発行市町村名:</label>
-                    <input type="text" id="issueCity" name="issueCity" class="input-group-field">
+                <div id="otherReasonDiv" style="display:none;">
+                    <label for="otherReasonTitle">戸籍事項:</label>
+                    <input type="text" id="otherReasonTitle" name="otherReason" class="input-group-field">
+                    <label for="otherReasonDescription">事由:</label>
+                    <input type="text" id="otherReasonDescription" name="otherReason" class="input-group-field">
                 </div>
-                <div class="cell small-4">
-                    <label for="issueType">種類:</label>
-                    <select id="issueType" name="issueType" class="input-group-field">
-                        <option value="city">市</option>
-                        <option value="ward">区</option>
-                        <option value="town">町</option>
-                        <option value="village">村</option>
-                    </select>
+            </fieldset>
+        </div>
+
+        <div class="card">
+            <fieldset>
+                <legend>戸籍に記録されている者</legend>
+                <div id="recordsContainer"></div>
+                <button type="button" class="button" onclick="addRecord()">＋</button>
+            </fieldset>
+        </div>
+
+        <div class="card">
+            <fieldset>
+                <legend>発行情報</legend>
+                <label for="issueNumber">発行番号:</label>
+                <input type="text" id="issueNumber" name="issueNumber" class="input-group-field">
+
+                <label for="issueDate">発行日:</label>
+                <input type="date" id="issueDate" name="issueDate" class="input-group-field">
+
+                <div class="grid-x grid-margin-x">
+                    <div class="cell small-8">
+                        <label for="issueCity">発行市町村名:</label>
+                        <input type="text" id="issueCity" name="issueCity" class="input-group-field">
+                    </div>
+                    <div class="cell small-4">
+                        <div style="height: 1.5em;"></div>
+                        <select id="issueType" name="issueType" class="input-group-field">
+                            <option value="city">市</option>
+                            <option value="ward">区</option>
+                            <option value="town">町</option>
+                            <option value="village">村</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
+                <label for="issuePrefecture">発行県:</label>
+                <select id="issuePrefecture" name="issuePrefecture" class="input-group-field">
+                    <option value="Hokkaido">北海道</option>
+                    <option value="Aomori">青森県</option>
+                    <option value="Iwate">岩手県</option>
+                    <option value="Miyagi">宮城県</option>
+                    <option value="Akita">秋田県</option>
+                    <option value="Yamagata">山形県</option>
+                    <option value="Fukushima">福島県</option>
+                    <option value="Ibaraki">茨城県</option>
+                    <option value="Tochigi">栃木県</option>
+                    <option value="Gunma">群馬県</option>
+                    <option value="Saitama">埼玉県</option>
+                    <option value="Chiba">千葉県</option>
+                    <option value="Tokyo">東京都</option>
+                    <option value="Kanagawa">神奈川県</option>
+                    <option value="Niigata">新潟県</option>
+                    <option value="Toyama">富山県</option>
+                    <option value="Ishikawa">石川県</option>
+                    <option value="Fukui">福井県</option>
+                    <option value="Yamanashi">山梨県</option>
+                    <option value="Nagano">長野県</option>
+                    <option value="Gifu">岐阜県</option>
+                    <option value="Shizuoka">静岡県</option>
+                    <option value="Aichi">愛知県</option>
+                    <option value="Mie">三重県</option>
+                    <option value="Shiga">滋賀県</option>
+                    <option value="Kyoto">京都府</option>
+                    <option value="Osaka">大阪府</option>
+                    <option value="Hyogo">兵庫県</option>
+                    <option value="Nara">奈良県</option>
+                    <option value="Wakayama">和歌山県</option>
+                    <option value="Tottori">鳥取県</option>
+                    <option value="Shimane">島根県</option>
+                    <option value="Okayama">岡山県</option>
+                    <option value="Hiroshima">広島県</option>
+                    <option value="Yamaguchi">山口県</option>
+                    <option value="Tokushima">徳島県</option>
+                    <option value="Kagawa">香川県</option>
+                    <option value="Ehime">愛媛県</option>
+                    <option value="Kochi">高知県</option>
+                    <option value="Fukuoka">福岡県</option>
+                    <option value="Saga">佐賀県</option>
+                    <option value="Nagasaki">長崎県</option>
+                    <option value="Kumamoto">熊本県</option>
+                    <option value="Oita">大分県</option>
+                    <option value="Miyazaki">宮崎県</option>
+                    <option value="Kagoshima">鹿児島県</option>
+                    <option value="Okinawa">沖縄県</option>
+                </select>
 
-            <label for="issuePrefecture">発行県:</label>
-            <select id="issuePrefecture" name="issuePrefecture" class="input-group-field">
-                <option value="Hokkaido">北海道</option>
-                <option value="Aomori">青森県</option>
-                <option value="Iwate">岩手県</option>
-                <option value="Miyagi">宮城県</option>
-                <option value="Akita">秋田県</option>
-                <option value="Yamagata">山形県</option>
-                <option value="Fukushima">福島県</option>
-                <option value="Ibaraki">茨城県</option>
-                <option value="Tochigi">栃木県</option>
-                <option value="Gunma">群馬県</option>
-                <option value="Saitama">埼玉県</option>
-                <option value="Chiba">千葉県</option>
-                <option value="Tokyo">東京都</option>
-                <option value="Kanagawa">神奈川県</option>
-                <option value="Niigata">新潟県</option>
-                <option value="Toyama">富山県</option>
-                <option value="Ishikawa">石川県</option>
-                <option value="Fukui">福井県</option>
-                <option value="Yamanashi">山梨県</option>
-                <option value="Nagano">長野県</option>
-                <option value="Gifu">岐阜県</option>
-                <option value="Shizuoka">静岡県</option>
-                <option value="Aichi">愛知県</option>
-                <option value="Mie">三重県</option>
-                <option value="Shiga">滋賀県</option>
-                <option value="Kyoto">京都府</option>
-                <option value="Osaka">大阪府</option>
-                <option value="Hyogo">兵庫県</option>
-                <option value="Nara">奈良県</option>
-                <option value="Wakayama">和歌山県</option>
-                <option value="Tottori">鳥取県</option>
-                <option value="Shimane">島根県</option>
-                <option value="Okayama">岡山県</option>
-                <option value="Hiroshima">広島県</option>
-                <option value="Yamaguchi">山口県</option>
-                <option value="Tokushima">徳島県</option>
-                <option value="Kagawa">香川県</option>
-                <option value="Ehime">愛媛県</option>
-                <option value="Kochi">高知県</option>
-                <option value="Fukuoka">福岡県</option>
-                <option value="Saga">佐賀県</option>
-                <option value="Nagasaki">長崎県</option>
-                <option value="Kumamoto">熊本県</option>
-                <option value="Oita">大分県</option>
-                <option value="Miyazaki">宮崎県</option>
-                <option value="Kagoshima">鹿児島県</option>
-                <option value="Okinawa">沖縄県</option>
-            </select>
+                <label for="issuerName">発行した市区町村長の名前:</label>
+                <input type="text" id="issuerName" name="issuerName" class="input-group-field">
+            </fieldset>
+        </div>
 
-            <label for="issuerName">発行した市区町村長の名前:</label>
-            <input type="text" id="issuerName" name="issuerName" class="input-group-field">
-        </fieldset>
+        <div class="card">
+            <fieldset>
+                <legend>翻訳者情報</legend>
+                <label for="translatorName">翻訳者の名前:</label>
+                <input type="text" id="translatorName" name="translatorName" class="input-group-field">
 
-        <fieldset>
-            <legend>翻訳者情報</legend>
-            <label for="translatorName">翻訳者の名前:</label>
-            <input type="text" id="translatorName" name="translatorName" class="input-group-field">
+                <label for="translationDate">翻訳日:</label>
+                <input type="date" id="translationDate" name="translationDate" class="input-group-field">
+            </fieldset>
+        </div>
 
-            <label for="translationDate">翻訳日:</label>
-            <input type="date" id="translationDate" name="translationDate" class="input-group-field">
-        </fieldset>
-
-        <button type="submit" class="button">ドキュメント作成</button>
+        <div class="generate-document-button">
+            <button type="submit" class="button">ドキュメント作成</button>
+        </div>
     </form>
 </div>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Foundation CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/css/foundation.min.css">
+<!-- Foundation JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
+
+<script src="main.js"></script>
 </body>
 </html>
