@@ -10,9 +10,10 @@ function toggleOtherReason() {
 
 // ------ 戸籍に記録されている者
 function addRecord() {
-    var recordsContainer = document.getElementById('recordsContainer');
-    var recordDiv = document.createElement('div');
+    const recordsContainer = document.getElementById('recordsContainer');
+    const recordDiv = document.createElement('div');
     recordDiv.className = 'record';
+    recordDiv.id = 'record-' + (recordsContainer.children.length + 1);
     recordDiv.innerHTML = `
                 <label>名:</label>
                 <input type="text" name="recordName" class="input-group-field">
@@ -38,9 +39,6 @@ function addRecord() {
 
                 <label>出生地:</label>
                 <input type="text" name="recordBirthPlace" class="input-group-field">
-
-                <label>届出日:</label>
-                <input type="date" name="recordReportDate">
 
                 <label>届出日:</label>
                 <input type="date" name="recordReportDate" class="input-group-field">
@@ -131,6 +129,33 @@ function generateDocument(event) {
             break;
     }
 
+    // person recorded in the family register
+    const recordsContainer = document.getElementById('recordsContainer');
+    const records = recordsContainer.getElementsByClassName('record');
+    let personRecords = [];
+
+    for (let i = 0; i < records.length; i++) {
+        const record = records[i];
+
+        const recordData = {
+            recordId: i + 1,
+            recordName: record.querySelector('input[name="recordName"]').value,
+            recordBirthDate: formatDate(record.querySelector('input[name="recordBirthDate"]').value),
+            recordFather: record.querySelector('input[name="recordFather"]').value,
+            recordMother: record.querySelector('input[name="recordMother"]').value,
+            recordRelation: record.querySelector('input[name="recordRelation"]').value,
+            recordSpouse: record.querySelector('input[name="recordSpouse"]').value,
+            recordBirthPlace: record.querySelector('input[name="recordBirthPlace"]').value,
+            recordReportDate: formatDate(record.querySelector('input[name="recordReportDate"]').value),
+            recordReporter: record.querySelector('input[name="recordReporter"]').value,
+            recordMarriageDate: formatDate(record.querySelector('input[name="recordMarriageDate"]').value),
+            recordSpouseName: record.querySelector('input[name="recordSpouseName"]').value,
+            recordPreviousAddress: record.querySelector('input[name="recordPreviousAddress"]').value,
+            recordPreviousHead: record.querySelector('input[name="recordPreviousHead"]').value
+        };
+        personRecords.push(recordData);
+    }
+
     // issue information
     const issueNumber = formData.get('issueNumber');
     const issueDate = formatDate(formData.get('issueDate'));
@@ -152,6 +177,7 @@ function generateDocument(event) {
                 revisionReasonTitle: revisionReasonTitle,
                 revisionReasonDescription: revisionReasonDescription,
                 revisionDate: revisionDate,
+                personRecords: personRecords,
                 translatorName: translatorName,
                 translationDate: translationDate,
                 issueNumber: issueNumber,

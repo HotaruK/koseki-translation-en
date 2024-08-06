@@ -72,6 +72,7 @@
 
     <div class="page-break"></div>
 
+    <!-- Head of family register -->
     <table>
         <tr>
             <td style="border-left: none; border-top: none;"></td>
@@ -98,6 +99,70 @@
         </tr>
     </table>
 
+    <!-- Person recorded in the family register -->
+    <table>
+        {{#personRecords}}
+        <tr>
+            <td rowspan="6">Person Recorded in the<br>Family Register<br><br>(Subject {{recordId}}:)</td>
+            <td style="text-align: center;">[Name]</td>
+            <td>{{recordName}}</td>
+        </tr>
+        <tr>
+            <td>[Date of Birth]</td>
+            <td>{{recordBirthDate}}</td>
+        </tr>
+        <tr>
+            <td>[Marital Status]</td>
+            <td><!-- Todo --></td>
+        </tr>
+        <tr>
+            <td>[Father]</td>
+            <td>{{recordFather}}</td>
+        </tr>
+        <tr>
+            <td>[Mother]</td>
+            <td>{{recordMother}}</td>
+        </tr>
+        <tr>
+            <td>[Relationship]</td>
+            <td>{{recordRelationship}}</td>
+        </tr>
+        <tr>
+            <td rowspan="6">Matters of the<br>Personal Status<br><br>Birth</td>
+            <td style="text-align: center;">[Date of Birth]</td>
+            <td>{{recordBirthDate}}</td>
+        </tr>
+        <tr>
+            <td>[Place of Birth]</td>
+            <td>{{recordBirthPlace}}</td>
+        </tr>
+        <tr>
+            <td>[Date of Notification]</td>
+            <td>{{recordReportDate}}</td>
+        </tr>
+        <tr>
+            <td>[Person Who Made<br>the Notification]</td>
+            <td>{{recordReporter}}</td>
+        </tr>
+        <tr>
+            <td>[Date of Receipt]</td>
+            <td>{{recordReportDate}}</td>
+        </tr>
+        <tr>
+            <td>[Person Who Accepted<br>the Notification]</td>
+            <td><!--Todo--></td>
+        </tr>
+        <tr>
+            <td rowspan="2">Marriage</td>
+            <td style="text-align: center">[Date of Marriage]</td>
+            <td>{{recordMarriageDate}}</td>
+        </tr>
+        <tr>
+            <td>[Name of the Spouse]</td>
+            <td>{{recordSpouseName}}</td>
+        </tr>
+        {{/personRecords}}
+    </table>
 
     <!-- Issue information -->
     <span class="small-text">Number of Issue: {{issueNumber}}</span><br>
