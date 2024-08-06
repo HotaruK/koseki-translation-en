@@ -46,6 +46,19 @@
             font-size: 0.8em;
         }
 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        td:first-child {
+            text-align: center;
+        }
+
         .page-break {
             page-break-before: always;
         }
@@ -56,9 +69,35 @@
     <!-- Page title -->
     <h1 class="title">Translation of Koseki Tohon Certificate</h1>
     <h2 class="subtitle">(Certificate of Family Register)</h2>
-    <p class="text-right">Certificate of All Records</p>
 
     <div class="page-break"></div>
+
+    <table>
+        <tr>
+            <td style="border-left: none; border-top: none;"></td>
+            <td style="text-align: right;">(1 of n)</td>
+            <td>Certificate of All Records</td>
+        </tr>
+        <tr>
+            <td>Permanent domicile</td>
+            <td colspan="2">{{honseki}}</td>
+        </tr>
+        <tr>
+            <td>Name (Householder)</td>
+            <td colspan="2">{{headName}}</td>
+        </tr>
+        <tr>
+            <td>Matters of the <br>Family Register</td>
+            <td style="text-align: center;">[Date of Revision]</td>
+            <td>{{revisionDate}}</td>
+        </tr>
+        <tr>
+            <td>{{revisionReasonTitle}}</td>
+            <td colspan="2">[Reason of Revision] {{revisionReasonDescription}}
+            </td>
+        </tr>
+    </table>
+
 
     <!-- Issue information -->
     <span class="small-text">Number of Issue: {{issueNumber}}</span><br>

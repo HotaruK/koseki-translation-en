@@ -96,6 +96,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function formatDate(date) {
+    if (date === "") {
+        return ""
+    }
     const options = {year: 'numeric', month: 'long', day: 'numeric'};
     return new Date(date).toLocaleDateString('en-US', options);
 }
@@ -104,6 +107,29 @@ function generateDocument(event) {
     event.preventDefault();
     const form = document.getElementById('kosekiForm');
     const formData = new FormData(form);
+
+    // head of family register
+    const honseki = formData.get('honseki');
+    const headName = formData.get('name');
+
+    // matters of the family register
+    const revisionReason = formData.get('revisionReason');
+    const revisionDate = formatDate(formData.get('revisionDate'));
+    const otherReasonTitle = formData.get('otherReasonTitle');
+    const otherReasonDescription = formData.get('otherReasonDescription');
+
+    let revisionReasonTitle = "";
+    let revisionReasonDescription = "";
+    switch (revisionReason) {
+        case "kaisei":
+            revisionReasonTitle = "Revision of the Family Register";
+            revisionReasonDescription = "Revision of Family Register pursuant to Article 2, paragraph 1of supplementary Provisions, Ordinance of the Ministry of Justice NO.51 of 1994";
+            break;
+        case "other":
+            revisionReasonTitle = otherReasonTitle;
+            revisionReasonDescription = otherReasonDescription;
+            break;
+    }
 
     // issue information
     const issueNumber = formData.get('issueNumber');
@@ -121,6 +147,11 @@ function generateDocument(event) {
         .then(response => response.text())
         .then(template => {
             const rendered = Mustache.render(template, {
+                honseki: honseki,
+                headName: headName,
+                revisionReasonTitle: revisionReasonTitle,
+                revisionReasonDescription: revisionReasonDescription,
+                revisionDate: revisionDate,
                 translatorName: translatorName,
                 translationDate: translationDate,
                 issueNumber: issueNumber,
